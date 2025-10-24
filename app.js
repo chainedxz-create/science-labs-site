@@ -1,10 +1,27 @@
 
 
 /* ---------- CONFIG: EDIT THESE ---------- */
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "REPLACE_WITH_YOUR_API_KEY",
-  authDomain: "your-project.firebaseapp.com",
-  projectId: "your-project-id",
+  apiKey: "AIzaSyBRbkj2Wc_ml9l4iPHadoMvIa6pdRJyO4Q",
+  authDomain: "science-labs-e6b1e.firebaseapp.com",
+  projectId: "science-labs-e6b1e",
+  storageBucket: "science-labs-e6b1e.firebasestorage.app",
+  messagingSenderId: "27316410227",
+  appId: "1:27316410227:web:f09d0af7f1f0fc66019706",
+  measurementId: "G-RJ5JKTDBX2"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
   // rest of the config as provided by Firebase
 };
 const NASA_API_KEY = "DEMO_KEY"; // Replace with your NASA API key for higher quota
