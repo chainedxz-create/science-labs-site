@@ -1,1 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Science Labs — Portal</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Firebase SDKs (Auth + App) -->
+  <script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><rect rx='6' ry='6' width='40' height='40' fill='%2322292e'/><circle cx='20' cy='14' r='6' fill='%23d9534f'/></svg>" alt="logo">
+      <div>
+        <h1>Science Labs</h1>
+        <small>Experimental Portal • Research & Play</small>
+      </div>
+    </div>
+    <nav>
+      <button id="btn-theme">Theme</button>
+      <button id="btn-signout" class="hidden">Sign out</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Landing / Login -->
+    <section id="landing" class="card">
+      <div class="landing-grid">
+        <div class="left">
+          <h2>Welcome to Science Labs</h2>
+          <p class="muted">A curated lab portal for experimental web apps and HTML5 games. Authenticate to access the portal and embedded games. This site fetches public science content to provide context and inspiration — not scraped private sources.</p>
+          <div id="apod" class="apod card small">
+            <div class="apod-loading">Loading NASA APOD...</div>
+          </div>
+
+          <div class="login-box card">
+            <h3>Sign in to access the portal</h3>
+
+            <div id="auth-errors" class="error"></div>
+
+            <div class="auth-buttons">
+              <button id="btn-google" class="btn">Continue with Google</button>
+            </div>
+
+            <div class="divider">OR</div>
+
+            <form id="email-signin" class="form">
+              <input id="email" type="email" placeholder="Email" required>
+              <input id="password" type="password" placeholder="Password" required minlength="6">
+              <div class="form-actions">
+                <button type="submit" class="btn primary">Sign in / Register</button>
+                <button id="btn-reset" type="button" class="btn link">Forgot?</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <aside class="right">
+          <div class="card">
+            <h4>Research Highlights</h4>
+            <ul id="highlights" class="list muted">
+              <li>Loading curated highlights…</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h4>About</h4>
+            <p class="muted small">This portal combines public science feeds (NASA APOD) and curated content. After login you'll reach the Game Portal where HTML5 games can be hosted inside an iframe.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Portal (hidden until auth) -->
+    <section id="portal" class="card hidden">
+      <div class="portal-grid">
+        <div class="portal-left">
+          <div class="card">
+            <div class="portal-header">
+              <h2>Game Portal</h2>
+              <div class="portal-meta muted" id="user-email"></div>
+            </div>
+
+            <div class="game-controls">
+              <label for="game-input">Paste game link or loadfunction('URL'):</label>
+              <textarea id="game-input" placeholder="loadfunction('https://example.com/game/index.html') or https://..."></textarea>
+              <div class="form-actions">
+                <button id="btn-add-game" class="btn primary">Add</button>
+                <button id="btn-clear-games" class="btn link">Clear list</button>
+              </div>
+            </div>
+
+            <div class="card small">
+              <h4>Available Games</h4>
+              <ul id="game-list" class="list"></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="portal-right">
+          <div class="card">
+            <h4>Player View</h4>
+            <div id="player" class="player">
+              <div id="player-placeholder" class="player-placeholder">No game loaded. Add a game from the left panel.</div>
+              <iframe id="game-frame" class="game-frame hidden" sandbox="allow-scripts allow-forms allow-same-origin allow-pointer-lock"></iframe>
+            </div>
+          </div>
+
+          <div class="card small">
+            <h4>Portal Tools</h4>
+            <p class="muted small">Quick commands: <code>loadfunction('URL')</code> is parsed automatically. You can copy game list JSON for backups.</p>
+            <div class="form-actions">
+              <button id="btn-export" class="btn">Export list</button>
+              <button id="btn-import" class="btn link">Import JSON</button>
+            </div>
+            <textarea id="import-json" class="hidden"></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>© Science Labs — public feeds courtesy of NASA APOD (DEMO_KEY). This is a static site template. Replace Firebase config in <code>app.js</code>.</small>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
 
